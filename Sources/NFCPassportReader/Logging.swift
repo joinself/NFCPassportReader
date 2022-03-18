@@ -43,13 +43,13 @@ public class Log {
     }
     
     class func log( _ logLevel : LogLevel, _ msg : () -> String ) {
-        if self.logLevel.rawValue <= logLevel.rawValue {
+        //if self.logLevel.rawValue <= logLevel.rawValue {
             let message = msg()
             print( message )
             
             if storeLogs {
                 logData.append( message )
             }
-        }
+        //}
     }
 }
