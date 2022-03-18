@@ -28,7 +28,7 @@ public class TagReader {
     }
     
     func reduceDataReadingAmount() {
-        if maxDataLengthToRead= 256 {
+        if maxDataLengthToRead = 256 {
             maxDataLengthToRead = 0xA0
         }
     }
