@@ -212,6 +212,10 @@ extension PassportReader {
         
         // Before we start the main work, lets try reading the EF.CardAccess
         tagReader?.readCardAccess(completed: { [unowned self] data, error in
+
+            Log.verbose( "readCardAccess - data - \(data)" )
+            Log.verbose( "readCardAccess - error - \(error)" )
+
             var ca : CardAccess?
             if let data = data {
                 Log.verbose( "Read CardAccess - data \(binToHexRep(data))" )
