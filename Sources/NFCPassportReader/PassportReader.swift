@@ -214,11 +214,11 @@ extension PassportReader {
         tagReader?.readCardAccess(completed: { [unowned self] data, error in
             var ca : CardAccess?
             if let data = data {
-                print( "Read CardAccess - data \(binToHexRep(data))" )
+                Log.verbose( "Read CardAccess - data \(binToHexRep(data))" )
                 do {
                     ca = try CardAccess(data)
                 } catch {
-                    print( "Error reading CardAccess - \(error)" )
+                    Log.verbose( "Error reading CardAccess - \(error)" )
                 }
             }
             
