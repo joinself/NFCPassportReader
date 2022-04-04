@@ -290,6 +290,7 @@ extension PassportReader {
     }
     
     func startReadingDataGroups() {
+        Log.debug("startReadingDataGroups.")
         self.readNextDataGroup( ) { [weak self] error in
             if self?.dataGroupsToRead.count != 0 {
                 // OK we've got more datagroups to go - we've probably failed security verification
@@ -484,9 +485,12 @@ extension PassportReader {
                     completed(nil)
                 } else if errMsg == "SM data objects incorrect" || errMsg == "Class not supported" {
                     // Can't read this element security objects now invalid - and return out so we re-do BAC
+                    Log.debug("SM data objects incorrect. Retry the data reading amount?")
+                    self.tagReader?.reduceDataReadingAmount()
                     completed(nil)
                 } else if errMsg.hasPrefix( "Wrong length" ) || errMsg.hasPrefix( "End of file" ) {  // Should now handle errors 0x6C xx, and 0x67 0x00
                     // OK passport can't handle max length so drop it down
+                    Log.debug("Wrong length -> Try to reduce the data reading amount.")
                     self.tagReader?.reduceDataReadingAmount()
                     completed(nil)
                 } else {
